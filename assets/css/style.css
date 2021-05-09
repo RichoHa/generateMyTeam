@@ -1,0 +1,17 @@
+:root{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+body{
+    margin:0;
+}
+
+#header{
+    margin:0;
+    background-color: red;
+    color:white;
+    text-align: center;
+    padding: 2em 0 2em 0; 
+}

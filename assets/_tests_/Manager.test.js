@@ -1,11 +1,5 @@
-const { describe } = require("yargs");
-var tests = require("../js/script");
-
-
-
+var tests = require("../js/index");
 //to run test: type 'npm run test' into command line and then pressing "a".
-
-
 
 //Test Name 
 test('When entering an empty string into the function, throw error message', () => {
@@ -69,7 +63,7 @@ test('When entering an special character into the function, throw error message'
   expect(tests.testOffice("sss][][d")).toBe(`(Please enter a valid office number)`);
 });
 
-test('When entering just numbers, return true', () => {
+test('When entering just, return true', () => {
   expect(tests.testOffice("45654")).toBe(true);
 });
 

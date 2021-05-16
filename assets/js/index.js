@@ -5,6 +5,8 @@ const prettier = require('../_tests_/node_modules/prettier');
 
 //-------------------------------------My VALIDITY TESTS-------------------------------------------------------------------------------
 
+
+
 function testName(name){
     if(name === ``){
         return `(Please enter a valid name)`
@@ -58,6 +60,36 @@ function testOffice(Office){
         return true;
     }
 }
+
+function testGithub(github){
+    if(github === ``){
+        return `(Please enter a valid github name)`
+    // } else if (id in myTeam){
+        // return `(id is used, use another number)`
+    }   else{
+        return true;
+    }
+}
+
+function testschool(testschool){
+    if(testschool === ``){
+        return `(Please enter a valid School name)`
+    // } else if (id in myTeam){
+        // return `(id is used, use another number)`
+    }   else{
+        return true;
+    }
+}
+
+//Export the test functions
+module.exports = {
+    testName,
+    testID,
+    testEmail,
+    testOffice,
+    testGithub,
+    testschool
+};
 
 //-------------------------------------My QUESTIONS-------------------------------------------------------------------------------
 async function myManagerFunction(){
@@ -141,7 +173,7 @@ async function myEngineerFunction(){
             message: 'What is the github user name of your engineer?',
             name: 'github',
             validate: (github) => {
-                return testOffice(github);
+                return testGithub(github);
             }
         }
     ]
@@ -188,7 +220,7 @@ async function myInternFunction(){
             message: 'What school did your intern go to?',
             name: 'school',
             validate: (school) => {
-                return testOffice(school);
+                return testschool(school);
             }
         }
     ]
@@ -229,11 +261,11 @@ function generateHTML(){
                 <div class="Card">
                     <div>
                         <h1>${myTeam[i].name}</h1>
-                        <p><i class="fas fa-mug-hot fa-lg"></i>${myTeam[i].getRole}</p>
+                        <p><i class="fas fa-mug-hot fa-lg"></i>${myTeam[i].getRole()}</p>
                     </div>
                     <div>
                         <p>ID: ${myTeam[i].id}</p>
-                        <p>Email:<a href="mailto:${myTeam[i].email}"> mailto:${myTeam[i].email}</a></p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> :${myTeam[i].email}</a></p>
                         <p>Office number: ${myTeam[i].officeNumber}</p>
                     </div>
                 </div>
@@ -246,11 +278,11 @@ function generateHTML(){
                 <div class="Card">
                     <div>
                         <h1>${myTeam[i].name}</h1>
-                        <p><i class="fas fa-glasses fa-lg"></i></i> ${myTeam[i].getRole}</p>
+                        <p><i class="fas fa-glasses fa-lg"></i> ${myTeam[i].getRole()}</p>
                     </div>
                     <div>
                         <p>ID:${myTeam[i].id}</p>
-                        <p>Email:<a href="mailto:${myTeam[i].email}"> mailto:${myTeam[i].email}</a></p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> :${myTeam[i].email}</a></p>
                         <p>GitHub:<a href="https://github.com/${myTeam[i].gitHub}">${myTeam[i].gitHub}</a></p>
                     </div>
                 </div>
@@ -263,19 +295,19 @@ function generateHTML(){
                 <div class="Card">
                     <div>
                         <h1>${myTeam[i].name}</h1>
-                        <p><i class="fas fa-graduation-cap fa-lg"></i></i> ${myTeam[i].getRole}</p>
+                        <p><i class="fas fa-graduation-cap fa-lg"></i> ${myTeam[i].getRole()}</p>
                     </div>
                     <div>
                         <p>ID:${myTeam[i].id}</p>
-                        <p>Email:<a href="mailto:${myTeam[i].email}"> mailto:${myTeam[i].email}</a></p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> :${myTeam[i].email}</a></p>
                         <p>GitHub: ${myTeam[i].school}</p>
                     </div>
-                /div>
+                </div>
                 `
             ,
             { parser: 'html' })
         }   
-    return htmlCode;
+
     }
     
     const finalHTML = prettier.format(
@@ -303,10 +335,14 @@ function generateHTML(){
     ,
     { parser: 'html' });
 
-console.log(`final HTML is${finalHTML}`)
-fs.unlinkSync('..\..\index.html');
-fs.writeFileSync('..\..\index.html', finalHTML);
-console.log(`success`)
+    fs.unlinkSync('../../index.html');
+    fs.writeFileSync(`../../index.html`, finalHTML, function(err){
+        if(err){
+            return console.log("Error Occured")
+        }else{
+            console.log(`successfully created`)
+        }
+    })
 }
 
 //-------------------------------------My Classes-------------------------------------------------------------------------------
@@ -368,13 +404,7 @@ class Intern extends Employee {
     }
 }
 
-//Export the test functions
-module.exports = {
-    testName,
-    testID,
-    testEmail,
-    testOffice
-}
+
 
 const myTeam = [];
 
@@ -405,7 +435,6 @@ async function Run() {
     Run();
     return;
     }
-
     generateHTML(myTeam);
 }
 

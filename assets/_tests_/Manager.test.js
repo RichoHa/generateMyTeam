@@ -67,4 +67,13 @@ test('When entering just, return true', () => {
   expect(tests.testOffice("45654")).toBe(true);
 });
 
+//Test Github
+test('When entering an empty string into the function, throw error message', () => {
+  expect(tests.testGithub("")).toBe(`(Please enter a valid Github username)`);
+});
 
+
+//Test School
+test('When entering an empty string into the function, throw error message', () => {
+  expect(tests.testschool("")).toBe(`(Please enter a valid school)`);
+});

@@ -1,9 +1,9 @@
 const inquirer = require("../_tests_/node_modules/inquirer/lib/inquirer");
 const fs = require('fs');
+const prettier = require('../_tests_/node_modules/prettier');
 
-let myTeam = [];
 
-//TESTS function
+//-------------------------------------My VALIDITY TESTS-------------------------------------------------------------------------------
 
 function testName(name){
     if(name === ``){
@@ -59,7 +59,7 @@ function testOffice(Office){
     }
 }
 
-//Questions Regarding Manager
+//-------------------------------------My QUESTIONS-------------------------------------------------------------------------------
 async function myManagerFunction(){
 
     const myManager = [
@@ -96,14 +96,16 @@ async function myManagerFunction(){
             }
         }
     ]
+    
     const response = await inquirer.prompt(myManager);
-    const Manager = new Employee(
-        reponse.nameManager,
-        reponse.idManager,
-        reponse.emailManager,
-        reponse.officeManager,
+
+    const addedManager = new Manager(
+        response.nameManager,
+        response.idManager,
+        response.emailManager,
+        response.officeManager,
     );
-    myTeam.push(addedManager);
+    return addedManager
 }
 
 //Questions Regarding Engineer
@@ -144,16 +146,16 @@ async function myEngineerFunction(){
         }
     ]
     const response = await inquirer.prompt(myEngineer);
-    const Engineer = new Employee(
-        reponse.nameEngineer,
-        reponse.idEngineer,
-        reponse.emailEngineer,
-        reponse.github,
+    const addedEngineer = new Engineer(
+        response.nameEngineer,
+        response.idEngineer,
+        response.emailEngineer,
+        response.github,
     );
-    myTeam.push(Engineer);
+    return addedEngineer;
 }
 
-//Questions Regarding Engineer
+// Questions Regarding Engineer
 async function myInternFunction(){
 
     const myIntern = [
@@ -184,39 +186,136 @@ async function myInternFunction(){
         {
             type: 'input',
             message: 'What school did your intern go to?',
-            name: 'github',
-            validate: (github) => {
-                return testOffice(github);
+            name: 'school',
+            validate: (school) => {
+                return testOffice(school);
             }
         }
     ]
-    const response = await inquirer.prompt(myEngineer);
-    const Engineer = new Employee(
-        reponse.nameEngineer,
-        reponse.idEngineer,
-        reponse.emailEngineer,
-        reponse.github,
+    const response = await inquirer.prompt(myIntern);
+    const addedIntern = new Intern(
+        response.nameIntern,
+        response.idIntern,
+        response.emailIntern,
+        response.school,
     );
-    myTeam.push(Engineer);
+    return addedIntern;
 }
 
-// class Manager extends Employee{
-//     constructor(name, id, email, role, officeNumber) {
-//         this.officeNumber = officeNumber;
-//     }
-//     getRole(){}
-// }
 
-// const shape = new Employee();
+async function choices() {
+    const employeeType = [
+      {
+        type: 'list',
+        name: 'employeeType',
+        message: 'Please choose an option',
+        choices: ['Add an Engineer', 'Add an Intern', 'Finish'],
+      },
+    ];
+      const response = await inquirer.prompt(employeeType);
+      return response.employeeType;
+}
 
-// shape.getName();
+
+//-------------------------------------My GENERATE FUNCTION-------------------------------------------------------------------------------
+
+let htmlCode = "";
+
+function generateHTML(){
+    for(var i = 0; i< myTeam.length; i++){
+        if(myTeam[i].getRole()==="Manager"){
+            htmlCode += prettier.format(
+                `
+                <div class="Card">
+                    <div>
+                        <h1>${myTeam[i].name}</h1>
+                        <p><i class="fas fa-mug-hot fa-lg"></i>${myTeam[i].getRole}</p>
+                    </div>
+                    <div>
+                        <p>ID: ${myTeam[i].id}</p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> mailto:${myTeam[i].email}</a></p>
+                        <p>Office number: ${myTeam[i].officeNumber}</p>
+                    </div>
+                </div>
+                `
+            ,
+            { parser: 'html' })
+        } else if (myTeam[i].getRole()==="Engineer"){
+            htmlCode += prettier.format(
+                `
+                <div class="Card">
+                    <div>
+                        <h1>${myTeam[i].name}</h1>
+                        <p><i class="fas fa-glasses fa-lg"></i></i> ${myTeam[i].getRole}</p>
+                    </div>
+                    <div>
+                        <p>ID:${myTeam[i].id}</p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> mailto:${myTeam[i].email}</a></p>
+                        <p>GitHub:<a href="https://github.com/${myTeam[i].gitHub}">${myTeam[i].gitHub}</a></p>
+                    </div>
+                </div>
+                `
+            ,
+            { parser: 'html' })
+        } else if (myTeam[i].getRole()==="Intern"){
+            htmlCode += prettier.format(
+                `
+                <div class="Card">
+                    <div>
+                        <h1>${myTeam[i].name}</h1>
+                        <p><i class="fas fa-graduation-cap fa-lg"></i></i> ${myTeam[i].getRole}</p>
+                    </div>
+                    <div>
+                        <p>ID:${myTeam[i].id}</p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> mailto:${myTeam[i].email}</a></p>
+                        <p>GitHub: ${myTeam[i].school}</p>
+                    </div>
+                /div>
+                `
+            ,
+            { parser: 'html' })
+        }   
+    return htmlCode;
+    }
+    
+    const finalHTML = prettier.format(
+        `<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset='utf-8'>
+            <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+            <title>GenerateTeam</title>
+            <meta name='viewport' content='width=device-width, initial-scale=1'>
+            <link rel='stylesheet' type='text/css' media='screen' href='./assets/css/style.css'>
+            <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet">
+        
+        </head>
+        <body>
+            <h1 id="header">My Team</h1>
+            
+            <div id="teamSection">
+            ${htmlCode}
+            </div>
+            <script src='./assets/js/script.js'></script>
+        </body>
+        </html>
+        `
+    ,
+    { parser: 'html' });
+
+console.log(`final HTML is${finalHTML}`)
+fs.unlinkSync('..\..\index.html');
+fs.writeFileSync('..\..\index.html', finalHTML);
+console.log(`success`)
+}
+
+//-------------------------------------My Classes-------------------------------------------------------------------------------
 
 class Employee{
-    constructor(name, id, email, role){
+    constructor(name, id, email){
         this.name= name;
         this.id=id;
         this.email=email;
-        this.role=role;
     }
 
     getName(){
@@ -269,8 +368,6 @@ class Intern extends Employee {
     }
 }
 
-
-
 //Export the test functions
 module.exports = {
     testName,
@@ -279,26 +376,37 @@ module.exports = {
     testOffice
 }
 
+const myTeam = [];
 
+//Running Code
+async function Run() {
 
+    if (myTeam.length<1){
+    const manager = await myManagerFunction();
+    myTeam.push(manager);
+    Run();
+    return;
+    //myTeam[0].getRole() returns Manager
+    //myTeam[0].name returns name etc
+    }
+    
+    const checkAction = await choices();
 
+    if(checkAction==='Add an Engineer'){
+    const engineer = await myEngineerFunction();
+    myTeam.push(engineer);
+    Run();
+    return;
+    }
 
-// class Engineer extends Employee{
-//     constructor(name, id, email, role, gitHub){
-//         this.gitHub = gitHub
-//     }
-//     getgitHub(){}
-//     getRole(){}
-//     //getRole()—overridden to return 'Engineer'
-// }
+    if(checkAction==='Add an Intern'){
+    const intern = await myInternFunction();
+    myTeam.push(intern);
+    Run();
+    return;
+    }
 
-// class Intern extends Employee{
-//     constructor(name, id, email, role, school){
-//         this.school = school
-//     }
-//     getSchool(){}
-//     getRole(){}
-//     //getRole()—overridden to return 'Intern'
-// }
+    generateHTML(myTeam);
+}
 
-// module.exports = {Employee, Manager, Engineer, Intern};
+Run();

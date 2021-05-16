@@ -1,3 +1,4 @@
+/* Global Parameters */
 :root{
     margin: 0;
     padding: 0;
@@ -15,8 +16,7 @@ h1{
 p{
     margin-bottom:0;
 }
-
-
+/* Main Section */
 #header{
     background-color: #e84756;
     color:white;
@@ -31,13 +31,13 @@ p{
     padding-top: 4em;
     gap:2.5em;
 }
-
+/* Card Section */
 .Card{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     width: 45%;
-    max-width: 400px;
+    max-width: 350px;
     text-align: left;
     box-shadow: 5px 10px #919090;
     border-radius: 0.5em;
@@ -64,7 +64,7 @@ p{
     word-break: break-all;
 }
 
-@media only screen and (max-width:  600px) {
+@media only screen and (max-width:  550px) {
     .Card{
         width: 90%;
     }

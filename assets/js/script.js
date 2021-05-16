@@ -1,7 +1,9 @@
 const inquirer = require("../_tests_/node_modules/inquirer/lib/inquirer");
 const fs = require('fs');
 
-function testName(name) {
+let myTeam = {};
+
+function testName(name){
     if(name === ``){
         return `(Please enter a valid name)`
     } else if (/\d/.test(name)){
@@ -13,28 +15,101 @@ function testName(name) {
     }
 }
 
-// const myManager = [
-//     {
-//         type: 'input',
-//         message: 'What is the name of your manager?',
-//         name: 'nameManager',
-//         validate: (nameManager) => {
-//             return testName(nameManager);
-//         }
-//     }
-// ]
+function testID(id){
+    if(id === ``){
+        return `(Please enter a valid id)`
+    // } else if (id in myTeam){
+        // return `(id is used, use another number)`
+    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(id)){
+        return `(Please enter a valid id)`
+    } else if (/[a-z]/i.test(id)){
+        return `(Please enter a valid id)`
+    }else{
+        return true;
+    }
+}
 
-// function getManager(){
-//     inquirer.prompt(myManager)
-//     .then(response => {
-//         console.log(`success`)
-//     })
-// }
+function testEmail(email){
+    if(email === ``){
+        return `(Please enter a valid email)`
+    // } else if (id in myTeam){
+        // return `(id is used, use another email)`
+    } 
+    if (/\S+@\S+\.\S+/.test(email)){
+        return true;
+    } else{
+        return `(Please enter a valid email)`
+    }
+}
 
-// getManager();
 
-module.exports = testName;
+function testOffice(Office){
+    if(Office === ``){
+        return `(Please enter a valid office number)`
+    // } else if (id in myTeam){
+        // return `(id is used, use another number)`
+    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(Office)){
+        return `(Please enter a valid office number)`
+    } else if (/[a-z]/i.test(Office)){
+        return `(Please enter a valid office number)`
+    }else{
+        return true;
+    }
+}
 
+const myManager = [
+    {
+        type: 'input',
+        message: 'What is the name of your manager?',
+        name: 'nameManager',
+        validate: (nameManager) => {
+            return testName(nameManager);
+        }
+    },
+    {
+        type: 'input',
+        message: 'What is the id of your manager?',
+        name: 'idManager',
+        validate: (idManager) => {
+            return testID(idManager);
+        }
+    },
+    {
+        type: 'input',
+        message: 'What is the email of your manager?',
+        name: 'emailManager',
+        validate: (emailManager) => {
+            return testEmail(emailManager);
+        }
+    },
+    {
+        type: 'input',
+        message: 'What is the office number of your manager?',
+        name: 'officeManager',
+        validate: (officeManager) => {
+            return testOffice(officeManager);
+        }
+    }
+]
+
+
+function getManager(){
+    inquirer.prompt(myManager)
+    .then(response => {
+        console.log(`success, output is ${response.nameManager}`)
+    })
+}
+
+getManager();
+
+
+//To test functions
+module.exports = {
+    testName,
+    testID,
+    testEmail,
+    testOffice
+}
 // const myManager = [
 //     {
 //         type: 'input',

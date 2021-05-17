@@ -46,5 +46,7 @@ https://github.com/RichoHa
 
 Link of video, using the application:
 https://youtu.be/FZ--i6tqCfM
+(there is an error shown in the video - where intern information is showing GIthub instead of school.)
+(as seen in the above photo, this is fixed.)
 
 or feel free to email me on Richo_haha@gmail.com.

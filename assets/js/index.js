@@ -300,7 +300,7 @@ function generateHTML(){
                     <div>
                         <p>ID:${myTeam[i].id}</p>
                         <p>Email:<a href="mailto:${myTeam[i].email}"> :${myTeam[i].email}</a></p>
-                        <p>GitHub: ${myTeam[i].school}</p>
+                        <p>School: ${myTeam[i].school}</p>
                     </div>
                 </div>
                 `

@@ -265,7 +265,7 @@ function generateHTML(){
                     </div>
                     <div>
                         <p>ID: ${myTeam[i].id}</p>
-                        <p>Email:<a href="mailto:${myTeam[i].email}"> :${myTeam[i].email}</a></p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> ${myTeam[i].email}</a></p>
                         <p>Office number: ${myTeam[i].officeNumber}</p>
                     </div>
                 </div>
@@ -282,7 +282,7 @@ function generateHTML(){
                     </div>
                     <div>
                         <p>ID:${myTeam[i].id}</p>
-                        <p>Email:<a href="mailto:${myTeam[i].email}"> :${myTeam[i].email}</a></p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> ${myTeam[i].email}</a></p>
                         <p>GitHub:<a href="https://github.com/${myTeam[i].gitHub}">${myTeam[i].gitHub}</a></p>
                     </div>
                 </div>
@@ -299,7 +299,7 @@ function generateHTML(){
                     </div>
                     <div>
                         <p>ID:${myTeam[i].id}</p>
-                        <p>Email:<a href="mailto:${myTeam[i].email}"> :${myTeam[i].email}</a></p>
+                        <p>Email:<a href="mailto:${myTeam[i].email}"> ${myTeam[i].email}</a></p>
                         <p>School: ${myTeam[i].school}</p>
                     </div>
                 </div>

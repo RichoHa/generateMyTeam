@@ -7,76 +7,76 @@ const prettier = require('../_tests_/node_modules/prettier');
 
 
 
-function testName(name){
-    if(name === ``){
+function testName(name) {
+    if (name === ``) {
         return `(Please enter a valid name)`
-    } else if (/\d/.test(name)){
+    } else if (/\d/.test(name)) {
         return `(Please enter a valid name)`
-    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(name)){
+    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(name)) {
         return `(Please enter a valid name)`
-    }else{
+    } else {
         return true;
     }
 }
 
-function testID(id){
-    if(id === ``){
+function testID(id) {
+    if (id === ``) {
         return `(Please enter a valid id)`
-    // } else if (id in myTeam){
+        // } else if (id in myTeam){
         // return `(id is used, use another number)`
-    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(id)){
+    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(id)) {
         return `(Please enter a valid id)`
-    } else if (/[a-z]/i.test(id)){
+    } else if (/[a-z]/i.test(id)) {
         return `(Please enter a valid id)`
-    }else{
+    } else {
         return true;
     }
 }
 
-function testEmail(email){
-    if(email === ``){
+function testEmail(email) {
+    if (email === ``) {
         return `(Please enter a valid email)`
-    // } else if (id in myTeam){
+        // } else if (id in myTeam){
         // return `(id is used, use another email)`
-    } 
-    if (/\S+@\S+\.\S+/.test(email)){
+    }
+    if (/\S+@\S+\.\S+/.test(email)) {
         return true;
-    } else{
+    } else {
         return `(Please enter a valid email)`
     }
 }
 
 
-function testOffice(Office){
-    if(Office === ``){
+function testOffice(Office) {
+    if (Office === ``) {
         return `(Please enter a valid office number)`
-    // } else if (id in myTeam){
+        // } else if (id in myTeam){
         // return `(id is used, use another number)`
-    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(Office)){
+    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(Office)) {
         return `(Please enter a valid office number)`
-    } else if (/[a-z]/i.test(Office)){
+    } else if (/[a-z]/i.test(Office)) {
         return `(Please enter a valid office number)`
-    }else{
+    } else {
         return true;
     }
 }
 
-function testGithub(github){
-    if(github === ``){
+function testGithub(github) {
+    if (github === ``) {
         return `(Please enter a valid github name)`
-    // } else if (id in myTeam){
+        // } else if (id in myTeam){
         // return `(id is used, use another number)`
-    }   else{
+    } else {
         return true;
     }
 }
 
-function testschool(testschool){
-    if(testschool === ``){
+function testschool(testschool) {
+    if (testschool === ``) {
         return `(Please enter a valid School name)`
-    // } else if (id in myTeam){
+        // } else if (id in myTeam){
         // return `(id is used, use another number)`
-    }   else{
+    } else {
         return true;
     }
 }
@@ -92,7 +92,7 @@ module.exports = {
 };
 
 //-------------------------------------My QUESTIONS-------------------------------------------------------------------------------
-async function myManagerFunction(){
+async function myManagerFunction() {
 
     const myManager = [
         {
@@ -128,7 +128,7 @@ async function myManagerFunction(){
             }
         }
     ]
-    
+
     const response = await inquirer.prompt(myManager);
 
     const addedManager = new Manager(
@@ -141,7 +141,7 @@ async function myManagerFunction(){
 }
 
 //Questions Regarding Engineer
-async function myEngineerFunction(){
+async function myEngineerFunction() {
 
     const myEngineer = [
         {
@@ -188,7 +188,7 @@ async function myEngineerFunction(){
 }
 
 // Questions Regarding Engineer
-async function myInternFunction(){
+async function myInternFunction() {
 
     const myIntern = [
         {
@@ -237,15 +237,15 @@ async function myInternFunction(){
 
 async function choices() {
     const employeeType = [
-      {
-        type: 'list',
-        name: 'employeeType',
-        message: 'Please choose an option',
-        choices: ['Add an Engineer', 'Add an Intern', 'Finish'],
-      },
+        {
+            type: 'list',
+            name: 'employeeType',
+            message: 'Please choose an option',
+            choices: ['Add an Engineer', 'Add an Intern', 'Finish'],
+        },
     ];
-      const response = await inquirer.prompt(employeeType);
-      return response.employeeType;
+    const response = await inquirer.prompt(employeeType);
+    return response.employeeType;
 }
 
 
@@ -253,9 +253,9 @@ async function choices() {
 
 let htmlCode = "";
 
-function generateHTML(){
-    for(var i = 0; i< myTeam.length; i++){
-        if(myTeam[i].getRole()==="Manager"){
+function generateHTML() {
+    for (var i = 0; i < myTeam.length; i++) {
+        if (myTeam[i].getRole() === "Manager") {
             htmlCode += prettier.format(
                 `
                 <div class="Card">
@@ -270,9 +270,9 @@ function generateHTML(){
                     </div>
                 </div>
                 `
-            ,
-            { parser: 'html' })
-        } else if (myTeam[i].getRole()==="Engineer"){
+                ,
+                { parser: 'html' })
+        } else if (myTeam[i].getRole() === "Engineer") {
             htmlCode += prettier.format(
                 `
                 <div class="Card">
@@ -287,9 +287,9 @@ function generateHTML(){
                     </div>
                 </div>
                 `
-            ,
-            { parser: 'html' })
-        } else if (myTeam[i].getRole()==="Intern"){
+                ,
+                { parser: 'html' })
+        } else if (myTeam[i].getRole() === "Intern") {
             htmlCode += prettier.format(
                 `
                 <div class="Card">
@@ -304,12 +304,12 @@ function generateHTML(){
                     </div>
                 </div>
                 `
-            ,
-            { parser: 'html' })
-        }   
+                ,
+                { parser: 'html' })
+        }
 
     }
-    
+
     const finalHTML = prettier.format(
         `<!DOCTYPE html>
         <html>
@@ -328,18 +328,17 @@ function generateHTML(){
             <div id="teamSection">
             ${htmlCode}
             </div>
-            <script src='./assets/js/script.js'></script>
         </body>
         </html>
         `
-    ,
-    { parser: 'html' });
+        ,
+        { parser: 'html' });
 
     fs.unlinkSync('../../index.html');
-    fs.writeFileSync(`../../index.html`, finalHTML, function(err){
-        if(err){
+    fs.writeFileSync(`../../index.html`, finalHTML, function (err) {
+        if (err) {
             return console.log("Error Occured")
-        }else{
+        } else {
             console.log(`successfully created`)
         }
     })
@@ -347,26 +346,26 @@ function generateHTML(){
 
 //-------------------------------------My Classes-------------------------------------------------------------------------------
 
-class Employee{
-    constructor(name, id, email){
-        this.name= name;
-        this.id=id;
-        this.email=email;
+class Employee {
+    constructor(name, id, email) {
+        this.name = name;
+        this.id = id;
+        this.email = email;
     }
 
-    getName(){
+    getName() {
         return this.name;
     }
 
-    getID(){
+    getID() {
         return this.id;
     }
 
-    getEmail(){
+    getEmail() {
         return this.email;
     }
 
-    getRole(){
+    getRole() {
         return 'Employee';
     }
 }
@@ -374,33 +373,33 @@ class Employee{
 
 class Manager extends Employee {
     constructor(name, id, email, officeNumber) {
-      super(name, id, email);
-      this.officeNumber = officeNumber;
+        super(name, id, email);
+        this.officeNumber = officeNumber;
     }
     getRole() {
-      return 'Manager';
+        return 'Manager';
     }
 }
 
 
 class Engineer extends Employee {
     constructor(name, id, email, gitHub) {
-      super(name, id, email);
-      this.gitHub = gitHub;
+        super(name, id, email);
+        this.gitHub = gitHub;
     }
     getRole() {
-      return 'Engineer';
+        return 'Engineer';
     }
 }
 
 
 class Intern extends Employee {
     constructor(name, id, email, school) {
-      super(name, id, email);
-      this.school = school;
+        super(name, id, email);
+        this.school = school;
     }
     getRole() {
-      return 'Intern';
+        return 'Intern';
     }
 }
 
@@ -411,29 +410,29 @@ const myTeam = [];
 //Running Code
 async function Run() {
 
-    if (myTeam.length<1){
-    const manager = await myManagerFunction();
-    myTeam.push(manager);
-    Run();
-    return;
-    //myTeam[0].getRole() returns Manager
-    //myTeam[0].name returns name etc
+    if (myTeam.length < 1) {
+        const manager = await myManagerFunction();
+        myTeam.push(manager);
+        Run();
+        return;
+        //myTeam[0].getRole() returns Manager
+        //myTeam[0].name returns name etc
     }
-    
+
     const checkAction = await choices();
 
-    if(checkAction==='Add an Engineer'){
-    const engineer = await myEngineerFunction();
-    myTeam.push(engineer);
-    Run();
-    return;
+    if (checkAction === 'Add an Engineer') {
+        const engineer = await myEngineerFunction();
+        myTeam.push(engineer);
+        Run();
+        return;
     }
 
-    if(checkAction==='Add an Intern'){
-    const intern = await myInternFunction();
-    myTeam.push(intern);
-    Run();
-    return;
+    if (checkAction === 'Add an Intern') {
+        const intern = await myInternFunction();
+        myTeam.push(intern);
+        Run();
+        return;
     }
     generateHTML(myTeam);
 }

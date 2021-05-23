@@ -19,7 +19,11 @@ https://github.com/RichoHa/generateMyTeam
 
 ## Installation
 This application if downloaded from GITHUB will require the node_modules installed.
-This is done by completing the npm install in your command line / terminal.
+PLEASE USE "npm install" in the directory where the package.json file is located (see below)
+(generateMyTeam/assets/_tests_)
+
+To run application please go to (generateMyTeam/assets/js)
+use "node index" to run application.
 
 ## Usage
 The usage of this application is to create/generate a HTML file of the team. 

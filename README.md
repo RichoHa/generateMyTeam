@@ -25,6 +25,8 @@ PLEASE USE "npm install" in the directory where the package.json file is located
 To run application please go to (generateMyTeam/assets/js)
 use "node index" to run application.
 
+To open generated html, please open index.html in the root file. 
+
 ## Usage
 The usage of this application is to create/generate a HTML file of the team. 
 See photo examples below.
